@@ -16,10 +16,10 @@ public static void main(String[] args) {
     ChessMatch chessMatch = new ChessMatch();
     List<ChessPiece> captured = new ArrayList<>();
     
-    while (!chessMatch.getCheckMate()) {
+    while (/*!chessMatch.getCheckMate()*/true) {
         try {
             UI.clearScreen();
-            UI.printMatch(chessMatch, captured);
+            UI.printMatch(chessMatch/*, captured*/);
             System.out.println();
             System.out.print("Source: ");
             ChessPosition source = UI.readChessPosition(sc);
@@ -33,7 +33,7 @@ public static void main(String[] args) {
             
             ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
             
-            if (capturedPiece != null) {
+           /* if (capturedPiece != null) {
                 captured.add(capturedPiece);
             }
             
@@ -45,7 +45,7 @@ public static void main(String[] args) {
                     type = sc.nextLine().toUpperCase();
                 }
                 chessMatch.replacePromotedPiece(type);
-            }
+            }*/
         }
         catch (ChessException e) {
             System.out.println(e.getMessage());
@@ -56,8 +56,8 @@ public static void main(String[] args) {
             sc.nextLine();
         }
     }
-    UI.clearScreen();
-    UI.printMatch(chessMatch, captured);
+   // UI.clearScreen();
+   // UI.printMatch(chessMatch/*, captured*/);
 }
 }
-}
+
