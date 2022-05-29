@@ -1,4 +1,4 @@
-package Aplication.Boardgame;
+package Boardgame;
 
 public abstract class Piece {
 

@@ -1,4 +1,4 @@
-package Aplication.Boardgame;
+package Boardgame;
 
 public class BoardException extends RuntimeException {
     public BoardException(String msg){

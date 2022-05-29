@@ -1,9 +1,9 @@
 package chess;
 
-import Aplication.Boardgame.Board;
-import Aplication.Boardgame.Piece;
-import Aplication.Boardgame.Position;
-import chess.pieces.Rook;
+import Boardgame.Board;
+import Boardgame.Piece;
+import Boardgame.Position;
+import pieces.Rook;
 
 public class ChessMatch {
 
@@ -28,9 +28,12 @@ public class ChessMatch {
         Position source = sourPosition.toPosition();
         Position target = targePosition.toPosition();
         validadeSourcePosition(source);
+        validadeTargetPosition(source, target);
         Piece capturedPiece = makeMove(source,target);
         return (ChessPiece) capturedPiece ;
     }
+
+    
 
     private Piece makeMove(Position source, Position target){
         Piece p = board.removePiece(source);
@@ -46,6 +49,12 @@ public class ChessMatch {
         if(!board.piece(position).isThereAnyPossibleMove()){
             throw new ChessException("There is no possible move for the chosen piece");
 
+        }
+    }
+
+    private void validadeTargetPosition(Position source, Position target) {
+        if(!board.piece(source).possibleMove(target)){
+            throw new ChessException("The chosen piece can't move to target position");
         }
     }
 
