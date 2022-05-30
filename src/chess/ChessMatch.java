@@ -33,6 +33,10 @@ public class ChessMatch {
         return turn;
     }
 
+    public boolean getCheck(){
+        return check;
+    }
+
     public Color getCurrentPlayer() {
         return currentPlayer;
     }
@@ -59,6 +63,11 @@ public class ChessMatch {
         validadeSourcePosition(source);
         validadeTargetPosition(source, target);
         Piece capturedPiece = makeMove(source, target);
+        if(testCheck(currentPlayer)){
+            undoMove(source, target, capturedPiece);
+            throw new ChessException("You can't put yourself in check");
+        }
+        check = (testCheck(opponent(currentPlayer))) ? true : false;
         nextTurn();
         return (ChessPiece) capturedPiece;
     }
@@ -119,7 +128,19 @@ public class ChessMatch {
                 return (ChessPiece)p;
             }
         }
-        throw new IllegalStateException("There is no " + color + "king on the board");
+        throw new IllegalStateException("There is no " + color + " king on the board");
+    }
+
+    private boolean testCheck(Color color){
+        Position kingPosition = king(color).getChessPosition().toPosition();
+        List<Piece> opponentPieces = piecesOnTheBoard.stream().filter(x -> ((ChessPiece)x).getColor() == opponent(color)).collect(Collectors.toList());
+        for(Piece p : opponentPieces){
+            boolean[][] mat = p.possibleMoves();
+            if(mat[kingPosition.getRow()][kingPosition.getColumn()]){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void placeNewPiece(char column, int row, ChessPiece piece){
@@ -132,8 +153,8 @@ public class ChessMatch {
        /* placeNewPiece('b', 1, new Knight(board, Color.WHITE));
         placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
         placeNewPiece('d', 1, new Queen(board, Color.WHITE));
-        placeNewPiece('e', 1, new King(board, Color.WHITE, this));
-        placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
+        */placeNewPiece('e', 1, new King(board, Color.WHITE));
+       /* placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
         placeNewPiece('g', 1, new Knight(board, Color.WHITE));
         placeNewPiece('h', 1, new Rook(board, Color.WHITE));
         placeNewPiece('a', 2, new Pawn(board, Color.WHITE, this));
