@@ -162,7 +162,7 @@ public class ChessMatch {
         for(Piece p : list){
             boolean[][] mat = p.possibleMoves();
             for(int i = 0; i < board.getRows();i++){
-                for(int j = 0; i < board.getColumns();j++ ){
+                for(int j = 0; j < board.getColumns();j++ ){
                     if(mat[i][j]){
                         Position source = ((ChessPiece)p).getChessPosition().toPosition();
                         Position target = new Position(i, j);
@@ -185,7 +185,7 @@ public class ChessMatch {
     }
 
     private void initialSetup() {
-        placeNewPiece('a', 1, new Rook(board, Color.WHITE));
+        /*placeNewPiece('a', 1, new Rook(board, Color.WHITE));
         /*placeNewPiece('b', 1, new Knight(board, Color.WHITE));
         placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
         placeNewPiece('d', 1, new Queen(board, Color.WHITE));
@@ -209,8 +209,8 @@ public class ChessMatch {
         */placeNewPiece('e', 8, new King(board, Color.BLACK));/*
         placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
         placeNewPiece('g', 8, new Knight(board, Color.BLACK));
-        placeNewPiece('h', 8, new Rook(board, Color.BLACK));
-        placeNewPiece('a', 7, new Pawn(board, Color.BLACK, this));
+        */placeNewPiece('h', 8, new Rook(board, Color.BLACK));
+        /*placeNewPiece('a', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('b', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('c', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('d', 7, new Pawn(board, Color.BLACK, this));
